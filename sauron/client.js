@@ -17,6 +17,7 @@ io.on("connection", (socket) => {
     console.log("socket connected");
 });
 
+// Handler
 app.get('/script', (req, res) => {
     pythonProcess = spawn('python', ["./pyscripts/script.py", 1, 2]);
     pythonProcess.stdout.on('data', function(data) {
@@ -25,6 +26,8 @@ app.get('/script', (req, res) => {
     });
     res.sendStatus(200);
 });
+
+
 
 
 
