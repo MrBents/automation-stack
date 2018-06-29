@@ -27,7 +27,7 @@ def setup():
 	GPIO.setup(ObstaclePin1, GPIO.IN, pull_up_down=GPIO.PUD_UP)
   	GPIO.setup(ObstaclePin2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-def loop():
+def loopit():
 	while True:
     if (datetime.now() > downtime1):
       now1 = True
@@ -62,8 +62,8 @@ def destroy():
 	GPIO.cleanup()                     # Release resource
 
 # if __name__ == '__main__':     # Program start from here
-	setup()
-	try:
-		loop()
-	except KeyboardInterrupt:  # When 'Ctrl+C' is pressed, the child program destroy() will be  executed.
-		destroy()
+setup()
+try:
+	loopit()
+except KeyboardInterrupt:  # When 'Ctrl+C' is pressed, the child program destroy() will be  executed.
+	destroy()

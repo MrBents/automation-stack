@@ -4,6 +4,7 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var spawn = require("child_process").spawn;
+var fs = require('fs');
 var pythonProcess;
 
 
@@ -19,12 +20,15 @@ io.on("connection", (socket) => {
 
 // Handler
 app.get('/script', (req, res) => {
-    pythonProcess = spawn('python', ["./pyscripts/script.py", 1, 2]);
-    pythonProcess.stdout.on('data', function(data) {
-        let j = data.toString('utf8');
-        console.log(JSON.stringify(j));
-    });
-    res.sendStatus(200);
+    req.data.pipe(fs.createWriteStream('./public/img.jpg')).then(() => {
+        res.sendStatus(200);
+    })
+    // pythonProcess = spawn('python', ["./pyscripts/script.py", 1, 2]);
+    // pythonProcess.stdout.on('data', function(data) {
+    //     let j = data.toString('utf8');
+    //     console.log(JSON.stringify(j));
+    // });
+    // res.sendStatus(200);
 });
 
 
