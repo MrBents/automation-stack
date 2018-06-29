@@ -20,13 +20,17 @@ io.on("connection", (socket) => {
 // Handler
 app.get('/script', (req, res) => {
     pythonProcess = spawn('python', ["./pyscripts/script.py", 1, 2]);
-    pythonProcess.stdout.on('data', function(data) {
+    pythonProcess.stdout.on('data', (data) => {
         let j = data.toString('utf8');
-        console.log(JSON.stringify(j));
+        console.log(j);
     });
     res.sendStatus(200);
 });
 
+app.get('start_testing', (req, res) => {
+  pythonProcess = spawn('python', ["./pyscripts/sensors.py"]);
+
+});
 
 
 
