@@ -19,7 +19,7 @@ io.on("connection", (socket) => {
 });
 
 // Handler
-app.get('/script', (req, res) => {
+app.post('/script', (req, res) => {
     req.data.pipe(fs.createWriteStream('./public/img.jpg')).then(() => {
         res.sendStatus(200);
     })

@@ -1,6 +1,9 @@
 import RPi.GPIO as GPIO
 import requests
 from datetime import datetime, timedelta
+import cv2
+
+cap = cv2.VideoCapture(0)
 
 ObstaclePin1 = 3
 ObstaclePin2 = 5
@@ -54,6 +57,8 @@ def loopit():
 	if (queue1.qsize() > 0):
 		if(queue1.queue[0] < datetime.now()):
 			queue1.get()
+            _, frame = cap.read()
+            requests.get('localhost:3000/script')
 			print('1')
 
 
