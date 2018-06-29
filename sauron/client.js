@@ -7,7 +7,7 @@ var spawn = require("child_process").spawn;
 var pythonProcess;
 
 
-app.use(express.static(__dirname));
+app.use(express.static(__dirname + '/public'));
 app.use(body_parser.json()); //
 app.use(body_parser.urlencoded({
     extended: false

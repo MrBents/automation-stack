@@ -1,0 +1,19 @@
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <img id="lafoto" src="/static/imgs/IMG_101_bad_5_M.JPEG"> </img>
+    <button id="elbotn">change</button>
+
+</body>
+
+<script>
+    $('#elbotn').click(() => {
+        $.get('http://localhost:5000/image', (res) => {
+            $('#lafoto').attr('src', res);
+        })
+        // $('#lafoto').attr('src', "/Users/maxbentata/NODE_playground/wasawski/backend/imgs/IMG_12_good_0_L.JPEG");
+    });
+</script>
