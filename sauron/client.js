@@ -20,9 +20,11 @@ io.on("connection", (socket) => {
 
 // Handler
 app.get('/script', (req, res) => {
-    req.data.pipe(fs.createWriteStream('./public/img.jpg')).then(() => {
-        res.sendStatus(200);
-    })
+    console.log('received');
+    res.sendStatus(200);
+    // req.data.pipe(fs.createWriteStream('./public/img.jpg')).then(() => {
+    //     res.sendStatus(200);
+    // })
     // pythonProcess = spawn('python', ["./pyscripts/script.py", 1, 2]);
     // pythonProcess.stdout.on('data', function(data) {
     //     let j = data.toString('utf8');
