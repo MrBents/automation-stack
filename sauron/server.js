@@ -1,28 +1,35 @@
 var express = require('express');
 var body_parser = require("body-parser");
 var app = express();
-var http = require('http').Server(app);
+var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 var spawn = require("child_process").spawn;
 var fs = require('fs');
-var toArray = require('stream-to-array')
+const fileUpload = require('express-fileupload');
 var pythonProcess;
+const axios = require('axios');
 
 
 app.use(express.static(__dirname + '/public'));
 app.use(body_parser.json()); //
 app.use(body_parser.urlencoded({
-    extended: true
+    extended: false
 })); // to allow for req.body
+app.use(fileUpload());
+// app.use(express.static('public'))
+
 
 io.on("connection", (socket) => {
     console.log("socket connected");
 });
 
+
 // Handler
 app.get('/script', (req, res) => {
     console.log('received');
-    res.sendStatus(200);
+    console.log(res)
+    console.log(req);
+    //res.sendStatus(200);
     // req.data.pipe(fs.createWriteStream('./public/img.jpg')).then(() => {
     //     res.sendStatus(200);
     // })
@@ -33,49 +40,44 @@ app.get('/script', (req, res) => {
     // });
     // res.sendStatus(200);
 });
+let current_path;
+let countgobriel = 0;
+var input_arr = [];
+app.post('/image', async (req, res) => {
 
-app.post('/image', (req, res) => {
+    console.time(`${countgobriel} someFunction`);
+    current_path = `dynamic_imgs/img${countgobriel}.jpg`;
+    let image = req.files.image;
+    var cl = await getClassification(image);
+    console.log(cl.data);
+    countgobriel++;
 
-    console.log('received photo');
-    toArray(req, (data) => {
-        console.log(data);
-    })
-    // var bufs = [];
-    // req.on('data', function(d) {
-    //     bufs.push(d);
-    // });
-    // req.on('end', function() {
-    //     var buf = Buffer.concat(bufs);
-    //     fs.writeFile(`./public/dynamic_imgs/img${Math.random()*100}.jpg`, buf, function(err) {
-    //         if (err) {
-    //             return console.log(err);
-    //         }
-    //
-    //         console.log("The file was saved!");
-    //         res.sendStatus(200);
-    //     });
-    // });
+    input_arr.push(current_path);
+    if(input_arr.length > 4)
+      input_arr = input_arr.slice(-5,);
 
-    // req.on('end', () => {
-    //     fs.writeFile(`./public/dynamic_imgs/img${Math.random()*100}.jpg`, data, function(err) {
-    //         if (err) {
-    //             return console.log(err);
-    //         }
-    //
-    //         console.log("The file was saved!");
-    //     });
-    //     res.sendStatus(200);
-    // })
-    // req.data.pipe(fs.createWriteStream(`./public/dynamic_imgs/img${Math.random()*100}.jpg`)).then(() => {
-    //     // io.emit("image");
-    // });
+    image.mv(`./public/dynamic_imgs/img${countgobriel}.jpg`, function(err) {
+    if (err)
+      return res.status(500).send(err);
+    io.emit('image');
+    res.send('File uploaded!');
+    });
 });
 
 app.get('/get_path', (req, res) => {
-    res.send(path);
+    res.send({'path' : current_path , 'lista': input_arr});
 })
 
-
+async function getClassification(image) {
+  console.log('gobriel');
+  // console.log(image)
+  // const formData = new FormData()
+  const config = {
+            headers: { 'content-type': 'multipart/form-data' }
+  }
+  var response = await axios.post('http://localhost:5000/image', image);
+  return response
+}
 
 
 
