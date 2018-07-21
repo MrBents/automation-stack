@@ -1,9 +1,10 @@
 import requests
 import time
+from datetime import datetime
 
 
 url = 'http://localhost:3000/image'
-filpath = [ './IMG_1135_bad_1.JPEG' ,'./IMG_16_good_0.JPEG', './test.jpg', './IMG_2635_bad_4.JPEG', './IMG_3215_bad_2.JPEG']
+filpath = [ './IMG_194_good_0.JPEG' ,'./IMG_2871_bad_3.JPEG', './IMG_3634_bad_3.JPEG', './IMG_3633_bad_3.JPEG', './IMG_2317_bad_4.JPEG']
 counter = 0
 
 
@@ -15,10 +16,12 @@ while True:
  #       print("gobriel")
  #       print(filpath[0])
         print (files)
- #      print (fil)
-        
-        requests.post(url, files=files)
+        now = datetime.now()
+        response = requests.post(url, files=files)
+        after = datetime.now()
+
+        print(after - now)
  #       requests.post(url, params=payload, headers=headers)
-        
+
         counter += 1
-        time.sleep(10)
+        time.sleep(5)

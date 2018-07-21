@@ -6,6 +6,9 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="src/js/horizBarChart.js"></script>
+<script type="text/javascript" src="canvasjs.min.js"></script>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -26,11 +29,14 @@
     <!-- Top container -->
     <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
         <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
-        <span class="w3-bar-item w3-left">Gotham Technologies</span>
+        <span class="w3-bar-item w3-left"  style="margin-left:30px;margin-right:30px">Wazowski</span>
+        <span class="w3-bar-item w3-center" >Conveyor 1</span>
+        <span class="w3-bar-item w3-right"  style="margin-left:30px;margin-right:30px">Gotham Technologies</span>
+
     </div>
 
     <!-- Sidebar/menu -->
-    <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+    <!-- <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
         <div class="w3-container w3-row">
             <div class="w3-col s4">
                 <img src="/img/mike.png" class="w3-circle w3-margin-center" style="width:65px">
@@ -40,9 +46,9 @@
             </div>
         </div>
         <hr>
-        <div class="w3-container">
+        <div class="w3-container"> -->
             <!-- <h5>Dashboard</h5> -->
-        </div>
+        <!-- </div>
         <div class="w3-bar-block">
             <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
             <a href="#" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-eye fa-fw"></i>  Overview</a>
@@ -60,95 +66,107 @@
             <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-spinner fa-fw"></i>  Conveyor 12</a>
             <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bar-chart fa-fw"></i>  Statistics</a><br><br>
         </div>
-    </nav>
+    </nav> -->
 
 
     <!-- Overlay effect when opening sidebar on small screens -->
-    <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+    <!-- <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div> -->
 
     <!-- !PAGE CONTENT! -->
-    <div class="w3-main" style="margin-left:300px;margin-top:43px;">
+    <div class="w3-main" style="margin-left:30px;margin-top:40px">
         <!-- Header -->
         <!-- <header class="w3-container" style="padding-top:22px"> -->
-            <h1><b><i class="fa fa-spinner w3-xxlarge"></i> Conveyor 1</b></h1>
+            <!-- <h3><b> <i class="fa fa-spinner w3-large"  style="margin-left:15px;margin-top:5px" ></i>  Conveyor 1</b></h3> -->
         <!-- </header> -->
 
         <!-- !PPP! -->
         <div class="w3-panel">
+
             <div class="w3-row-padding" style="margin:0 -16px">
-                <div class="w3-third">
+
+                <div class="w3-third" >
                     <h3>Zipper Photo</h3>
-                    <img id="main_photo" src="/img/IMG_16_good_0.JPEG" style="width:97.5%;height:97.5%; border:3px solid black"  alt="Zipper Photo">
+                    <img id="main_photo" src="/CROPPED_IMGS/img0_good.jpg" style="width:78%;height:78%; border:3px solid black"  alt="Zipper Photo">
                 </div>
-                <div class="w3-twothird">
+                <div class="w3-rest" style="margin-right:40px">
                     <h3>Feeds</h3>
-                    <table class="w3-table w3-striped w3-white">
+                    <table id="DaTable" class="w3-table w3-striped w3-white">
                         <tr>
                             <td id='list_0_0'><i class=""></i></td>
                             <td id='list_0'>...</td>
-                            <td><i>3 seconds</i></td>
+                            <td><i></i></td>
                         </tr>
                         <tr>
-                            <td><i class="fa fa-check w3-text-green w3-large"></i></td>
+                            <td><i class=""></i></td>
                             <td id='list_1'>...</td>
-                            <td><i>5 seconds</i></td>
+                            <td><i></i></td>
                         </tr>
                         <tr>
-                            <td><i class="fa fa-check w3-text-green w3-large"></i></td>
-                            <td>ID 0000035627 GOOD 8" Blue</td>
-                            <td><i>7 seconds</i></td>
+                            <td><i class=""></i></td>
+                            <td>...</td>
+                            <td><i></i></td>
                         </tr>
                         <tr>
-                            <td><i class="fa fa-close w3-text-red w3-large"></i></td>
-                            <td>ID 0000035626 BAD 8" Blue</td>
-                            <td><i>9 seconds</i></td>
+                            <td><i class=""></i></td>
+                            <td>...</td>
+                            <td><i></i></td>
                         </tr>
                         <tr>
-                            <td><i class="fa fa-check w3-text-green w3-large"></i></td>
-                            <td>ID 0000035625 GOOD 8" Blue</td>
-                            <td><i>11 seconds</i></td>
+                            <td><i class=""></i></td>
+                            <td>...</td>
+                            <td><i></i></td>
                         </tr>
                         <tr>
-                            <td><i class="fa fa-check w3-text-green w3-large"></i></td>
-                            <td>ID 0000035624 GOOD 8" Blue</td>
-                            <td><i>13 seconds</i></td>
+                            <td><i class=""></i></td>
+                            <td>...</td>
+                            <td><i></i></td>
                         </tr>
                         <tr>
-                            <td><i class="fa fa-close w3-text-red w3-large"></i></td>
-                            <td>ID 0000035623 BAD 8" Blue</td>
-                            <td><i>15 seconds</i></td>
+                            <td><i class=""></i></td>
+                            <td>...</td>
+                            <td><i></i></td>
                         </tr>
                         <tr>
-                            <td><i class="fa fa-check w3-text-green w3-large"></i></td>
-                            <td>ID 0000035622 GOOD 8" Blue</td>
-                            <td><i>17 seconds</i></td>
+                            <td><i class=""></i></td>
+                            <td>...</td>
+                            <td><i></i></td>
                         </tr>
                         <tr>
-                            <td><i class="fa fa-check w3-text-green w3-large"></i></td>
-                            <td>ID 0000035621 GOOD 8" Blue</td>
-                            <td><i>19 seconds</i></td>
+                            <td><i class=""></i></td>
+                            <td>...</td>
+                            <td><i></i></td>
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
 
+
         <hr>
-        <div class="w3-container">
+        <div class="w3-container" style="margin-right:30px">
             <!-- <h5>General Stats</h5> -->
             <p>Good Rate</p>
-            <div class="w3-grey">
-                <div class="w3-container w3-center w3-padding w3-green" style="width:98%">+98%</div>
+            <div class="w3-grey w3-twothird w3-right">
+                <div id='container1' class="w3-container w3-center w3-green" style="width:0%">0%</div>
             </div>
 
             <p>Bad Rate</p>
-            <div class="w3-grey">
-                <div class="w3-container w3-center w3-padding w3-red" style="width:2%">2%</div>
+            <div class="w3-grey w3-twothird w3-right">
+                <div id='container2' class="w3-container w3-center  w3-red" style="width:0%">0%</div>
             </div>
         </div>
         <hr>
 
-        <div class="w3-row-padding w3-margin-bottom">
+<!--
+        <div class="w3-row-padding">
+  <div class="w3-third w3-container w3-two-thirds w3-left w3-green" style="width:10%">hey</div>
+  <div class="w3-third w3-container w3-center w3-green" style="width:10%">hay</div>
+  <div class="w3-third w3-container w3-right w3-green" style="width:10%">hoy</div>
+        </div> -->
+
+
+
+        <!-- <div class="w3-row-padding w3-margin-bottom">
             <div class="w3-quarter">
                 <div class="w3-center">
                     <img src="/img/IMG_2635_bad_4.JPEG" style="width:80%;height:80%;" alt="Zipper Photo">
@@ -172,11 +190,11 @@
                 </div>
             </div>
 
-        </div>
+        </div> -->
 
         <!-- Footer -->
-        <footer class="w3-container w3-padding-16 w3-light-grey">
-            <h4>Powered by Gotham Technologies</h4>
+        <footer class="w3-light-grey">
+            <h5>Powered by Gotham Technologies</h5>
         </footer>
 
         <!-- End page content -->
@@ -186,18 +204,54 @@
         var socket = io.connect('http://localhost:3000');
 
         socket.on('image', function(lol) {
-            console.log("Hello Moto");
+            var date3 = Date.parse(Date())
             $.get('http://localhost:3000/get_path', (data) => {
-            console.log(data.path)
-                $("#main_photo").attr('src', data.path);
 
+                // $("#main_photo").attr('src', (data.path));
+                var name_ima = data.name
+                var tag_ima = data.tag
+                var tag_ima_error = data.errortag
+                var goodPer = data.goodp
+                var badPer = data.badp
+                // var date4 = Date.parse(Date())
+                var date4 = (new Date());
+                date4 = date4.getHours() + ':' + date4.getMinutes();
+
+                if (tag_ima == 'good'){
+                  var icon = "<i class='fa fa-check w3-text-green w3-large'>";
+                }
+                else if (tag_ima == 'bad'){
+                  var icon = "<i class='fa fa-close w3-text-red w3-large'>";
+                }
+                // console.log(date4-date3)
                 // document.getElementById('list_0_0').className.replace = "fa fa-close w3-text-red w3-large";
-                document.getElementById('list_0_0').className = "fa fa-close w3-text-red w3-large";
+                var table = document.getElementById("DaTable");
 
-                document.getElementById('list_0').innerHTML = String(data.path).slice(13,-4);
-                var variable1 = ((String(data.lista).split("/")).slice(-2,-1))
-                var variable1 = ((String(variable1).split(",")).slice(0,1))
-                document.getElementById('list_1').innerHTML = String(variable1).slice(0,-4);
+                if (name_ima != null){
+                document.getElementById('main_photo').src = '/CROPPED_IMGS/' + data.name + '_' + data.tag + '_' + data.errortag + '.jpg';
+                table.deleteRow(8);
+                var row = table.insertRow(0);
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
+                // var cell4 = row.insertCell(3);
+                cell1.innerHTML = icon;
+                cell2.innerHTML = name_ima + " " + tag_ima + " " + tag_ima_error.split('.')[0];
+                cell3.innerHTML = date4;
+                // cell4.innerHTML = date4;
+
+                document.getElementById('container1').style = "width:" + goodPer + "%" ;
+                document.getElementById('container1').innerHTML = String(goodPer) + "%";
+                document.getElementById('container2').style = "width:" + badPer + "%" ;
+                document.getElementById('container2').innerHTML = String(badPer) + "%";
+              }
+
+                // document.getElementById('list_0_0').className = "fa fa-close w3-text-red w3-large";
+                //
+                // document.getElementById('list_0').innerHTML = String(data.path).slice(13,-4);
+                // var variable1 = ((String(data.lista).split("/")).slice(-2,-1))
+                // var variable1 = ((String(variable1).split(",")).slice(0,1))
+                // document.getElementById('list_1').innerHTML = String(variable1).slice(0,-4);
             });
         });
         // Get the Sidebar
@@ -224,6 +278,8 @@
             overlayBg.style.display = "none";
         }
     </script>
+
+
 
 </body>
 
